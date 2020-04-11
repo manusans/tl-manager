@@ -1,50 +1,69 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from 'react';
+import { fetchOrders } from './helpers/order'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-class LambdaDemo extends Component {
+
+var orders = [];
+
+function newLined(order) {
+   let newText = order.split('\n').map((item, i) => {
+      return <p style={{margin:0}} key={i}>{item}</p>;
+   });
+   return newText;
+}
+
+ class App extends Component {
   constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
+     super(props);
+     this.state = { orders: [], loading : true };
   }
 
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
+  componentDidMount() {
+     fetchOrders()
+        .then((res) => this._setOrders(res.reverse()));
   }
 
-  render() {
-    const { loading, msg } = this.state
+   _setOrders(fetchedOrders) {
+      this.setState({ orders: fetchedOrders, loading: false });
+      console.log(this.state.orders[0])
+   } 
 
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
+   render() {
+
+      //Formatted Orders
+      const formattedOrders = (
+         <div>
+            {this.state.orders.map(order => (
+               <div class='card mt-5 p-3'>{newLined(order)}
+                  <br />
+                  <CopyToClipboard text={order}
+                     onCopy={() => this.setState({copied: true})}>
+                     <button class='btn btn-primary'>Copia Ordine</button>
+                  </CopyToClipboard>
+                  
+               </div>
+            ))}
+         </div>
+      ); 
+
+      if (this.state.loading) {
+         return (
+            <div style={{color:'white'}}>
+               <h3 class='display-3 text-center'>carico gli ordini..</h3>
+            </div>
+         )
+      };
+
+      
+      return (
+         <div class='container'>
+            {formattedOrders}
+         </div>
+      )
+   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
+
 
 export default App
