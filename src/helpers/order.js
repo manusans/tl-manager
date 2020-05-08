@@ -37,7 +37,7 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                   for (let j = 0; j < body[i].line_items.length; j++) {
                      for (let z = 0; z < prodMap.length; z++) {
                         if (prodMap[z].id === body[i].line_items[j].product_id) {
-                           orderList += '\n' + '.... ' + body[i].line_items[j].quantity + ' X ' + prodMap[z].name + '( ' + prodMap[z].price + ' Euro )'
+                           orderList += '\n' + '.... ' + body[i].line_items[j].quantity + ' X ' + prodMap[z].name + ' ( ' + prodMap[z].price + ' Euro )'
                         }
                      }
                   }
@@ -48,12 +48,12 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                      try{
                      for (let j = 0; j < pizza.length; j++) {
                         orderList += '\n' + '    ' + pizza[j].qty + ' X ' + pizza[j].name 
-                                + '\n.... PREZZO BASE: ' + pizza[j].price + ' Euro'
+                                + '\n.... PREZZO TOTALE: ' + pizza[j].price + ' Euro'
                                 + '\n.... NOTE: ' + pizza[j].optionals.notes  
                                 + '\n.... IMPASTO: ' + pizza[j].optionals.pasta.name 
                                 + '\n.... BASE: ' + pizza[j].optionals.base.name
                                 + '\n.... INGREDIENTI AGG: ' 
-                                + Object.keys(pizza[j].optionals.ingredients).map(function(k){return '\n........ ' + pizza[j].optionals.ingredients[k].name + ' ( +' + pizza[j].optionals.ingredients[k].price + ' Euro )'});
+                                + Object.keys(pizza[j].optionals.ingredients).map(function(k){return '\n........ ' + pizza[j].optionals.ingredients[k].name + ' ( ' + pizza[j].optionals.ingredients[k].price + ' Euro )'});
 
                                  
                      }}catch(err){
