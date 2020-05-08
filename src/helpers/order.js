@@ -51,7 +51,7 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                                 + '\n.... IMPASTO: ' + pizza[j].optionals.pasta.name 
                                 + '\n.... BASE: ' + pizza[j].optionals.base.name
                                 + '\n.... INGREDIENTI AGG: ' 
-                                + Object.keys(pizza[j].optionals.ingredients).map(function(k){return '\n........ ' + pizza[j].optionals.ingredients[k].name + '(+' + pizza[j].optionals.ingredients[k].price + ' euro)'});
+                                + Object.keys(pizza[j].optionals.ingredients).map(function(k){return '\n........ ' + pizza[j].optionals.ingredients[k].name + ' (+' + pizza[j].optionals.ingredients[k].price + ' euro)'});
 
                                  
                      }}catch(err){
