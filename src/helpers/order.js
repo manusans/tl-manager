@@ -29,6 +29,7 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                   orderList += "INDIRIZZO: " + body[i].billing.address_1 + '\n';
                   orderList += "EMAIL: " + body[i].billing.email + '\n';
                   orderList += "CELL: " + body[i].billing.phone + '\n';
+                  orderList += "PIANO: " + body[i].billing.floor + '\n';
                   orderList += "PAGAMENTO: " + body[i].payment_method + '\n';
                   orderList += "DATA/ORA CONSEGNA: " + body[i].dateTime + '\n';
                   orderList += "PRODOTTI: "
