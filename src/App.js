@@ -21,7 +21,7 @@ function newLined(order) {
 
   componentDidMount() {
      fetchOrders()
-        .then((res) => this._setOrders(res.reverse()));
+        .then((res) => this._setOrders(res));
   }
 
    _setOrders(fetchedOrders) {

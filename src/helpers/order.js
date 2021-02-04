@@ -13,6 +13,7 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
    fetch('https://time2livery.com/exercises')
       .then(res => res.json())
       .then(body => {
+
          for (var i = 0; i < body.length; i++) {
             prodMap.push({ id: body[i].id, name: body[i].name, price: body[i].price });
          }
@@ -20,7 +21,7 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
 
 
 
-         fetch('https://time2livery.com/orders')
+         fetch('https://time2livery.com/orders/last')
             .then(res => res.json())
             .then(body => {
                for (let i = 0; i < body.length; i++) {
