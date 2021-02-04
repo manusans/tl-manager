@@ -4,8 +4,6 @@ import { fetchOrders } from './helpers/order'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 
-var orders = [];
-
 function newLined(order) {
    let newText = order.split('\n').map((item, i) => {
       return <p style={{margin:0}} key={i}>{item}</p>;
