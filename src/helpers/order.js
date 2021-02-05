@@ -45,13 +45,13 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                      try{
                      for (let j = 0; j < pizza.length; j++) {
                         orderList += `\n ${pizza[j].qty} X ${pizza[j].name}
-                               .... PREZZO TOTALE: ${pizza[j].price} Euro
-                               .... NOTE: ${pizza[j].optionals.notes}  
-                               .... IMPASTO: ${pizza[j].optionals.pasta.name} 
-                               .... BASE: ${pizza[j].optionals.base.name}
-                               .... INGREDIENTI AGG: ` 
-                               // eslint-disable-next-line
-                                + Object.keys(pizza[j].optionals.ingredients).map(function(k){return `\n ${pizza[j].optionals.ingredients[k].name} ( ${pizza[j].optionals.ingredients[k].price} Euro )`});
+.... PREZZO TOTALE: ${pizza[j].price} Euro
+.... NOTE: ${pizza[j].optionals.notes}  
+.... IMPASTO: ${pizza[j].optionals.pasta.name} 
+.... BASE: ${pizza[j].optionals.base.name}
+.... INGREDIENTI AGG: ` 
+// eslint-disable-next-line
++ Object.keys(pizza[j].optionals.ingredients).map(function(k){return `\n ${pizza[j].optionals.ingredients[k].name} ( ${pizza[j].optionals.ingredients[k].price} Euro )`});
 
                                  
                      }}catch(err){
