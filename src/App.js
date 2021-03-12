@@ -107,7 +107,7 @@ const Slots = (props) => {
    const formattedSlots = (
       <div className="text-center">
          <div className="alert alert-primary mt-3">
-            <h5>stazio_free v1.0 - Slot DELIVERY 🍕</h5>
+            <h5>stazio_free v1.0 - Slot DELIVERY</h5>
          </div>
          {props.slots.map(slot => (
             <div className = 'card mt-3 text-center'>
@@ -147,7 +147,7 @@ const Slots = (props) => {
       const formattedSlots = (
          <div className="text-center">
             <div className="alert alert-primary mt-3">
-               <h5>stazio_free v1.1 - Slot ASPORTO 🍕</h5>
+               <h5>stazio_free v1.1 - Slot ASPORTO</h5>
             </div>
             {props.tslots.map(tslot => (
                <div className = 'card mt-3 text-center'>
