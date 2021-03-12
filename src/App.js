@@ -4,6 +4,7 @@ import React, { useState, useEffect} from 'react';
 //internal api
 import { fetchOrders } from './helpers/order';
 import { fetchSlots, changeSlotStatus } from './helpers/slot';
+import { fetchTSlots, changeTSlotStatus } from './helpers/tslot';
 
 //interna utilities
 import {formatDate} from './utilities/date';
@@ -28,6 +29,7 @@ function App() {
    const [data, setData] = useState({
       orders : [],
       slots : [],
+      tslots: [],
    });
    
    
@@ -40,9 +42,12 @@ function App() {
       fetchOrders().then(orders => {
          retOrders = orders;
          fetchSlots().then( slots =>{
-            setData({
-               orders : retOrders,
-               slots : slots,
+            fetchTSlots().then( tslots =>{
+               setData({
+                  orders : retOrders,
+                  slots : slots,
+                  tslots : tslots,
+               })
             })
          })
       })
@@ -58,6 +63,9 @@ function App() {
                </Route>
                <Route path="/slots">
                   <Slots slots={data.slots} refresh={refresh} />
+               </Route>
+               <Route path="/tslots">
+                  <TSlots tslots={data.tslots} refresh={refresh} />
                </Route>
                <Route path="/">
                   <Orders orders={data.orders}/>
@@ -96,11 +104,10 @@ function App() {
 }
 
 const Slots = (props) => {
-
    const formattedSlots = (
       <div className="text-center">
          <div className="alert alert-primary mt-3">
-            <h5>stazio_free v1.0</h5>
+            <h5>stazio_free v1.0 - Slot DELIVERY 🍕</h5>
          </div>
          {props.slots.map(slot => (
             <div className = 'card mt-3 text-center'>
@@ -134,8 +141,50 @@ const Slots = (props) => {
          }
       </div>
    );
-}
+   }
+
+   const TSlots = (props) => {
+      const formattedSlots = (
+         <div className="text-center">
+            <div className="alert alert-primary mt-3">
+               <h5>stazio_free v1.1 - Slot ASPORTO 🍕</h5>
+            </div>
+            {props.tslots.map(tslot => (
+               <div className = 'card mt-3 text-center'>
+                  <h5 className = 'card-title '>SLOT DEL GIORNO: {formatDate(tslot.day).italianDate}</h5>
+                  <div className = 'row'>
+                  {
+                     tslot.time_ranges.map(range => (
+                        <div className = 'col col-6'>
+                           <button 
+                              onClick={() => {
+                                 changeTSlotStatus(tslot.day, range.start_time, range.associated_order)
+                                 .then(res => props.refresh())
+                              }} 
+                              class= {range.associated_order === 'NO' ? 'btn btn-success m-1' : 'btn btn-danger m-1'}
+                           >
+                              {range.start_time} - {range.end_time}
+                           </button>
+                        </div>
+                     ))
+                  }
+                  </div>
+               </div>
+            ))}
+         </div>
+      );
+
+   return(
+      <div class='container'>
+         {
+            formattedSlots
+         }
+      </div>
+   );
+   }
+   
 
 
 
-export default App
+
+export default App;
