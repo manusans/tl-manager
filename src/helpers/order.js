@@ -29,8 +29,8 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                   orderList += `PIANO: ${body[i].shipping.floor}\n`;
                   orderList += `PAGAMENTO: ${body[i].payment_method}\n`;
                   orderList += `DATA/ORA CONSEGNA: ${body[i].dateTime}\n`;
-                  orderList += `PRODOTTI: `
-
+                  
+                  orderList += body[i].line_items.length === 0 ? `` : `\n---- PRODOTTI ----\n`;
                   for (let j = 0; j < body[i].line_items.length; j++) {
                      for (let z = 0; z < prodMap.length; z++) {
                         if (prodMap[z].id === body[i].line_items[j].product_id) {
@@ -38,10 +38,17 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                         }
                      }
                   }
+                  
+                  orderList += body[i].iceCreams.length === 0 ? `` : `\n---- GELATI ----\n`;
+                  for (let k = 0; k < body[i].iceCreams.length; k++){
+                     orderList += `  ${k+1}) ${body[i].iceCreams[k].product.name} (${body[i].iceCreams[k].product.price}€) con:\n`;
+                     orderList += `  ...... ${body[i].iceCreams[k].flavors.join("\n...... ")}`;
+                     orderList += `\n`;                     
+                  }
 
                   if(body[i].pizza_items){
                      var pizza = body[i].pizza_items;
-                     orderList += pizza.length > 0 ? `\nPIZZE: ` : ``;
+                     orderList += pizza.length > 0 ? `\n---- PIZZE ----` : ``;
                      try{
                      for (let j = 0; j < pizza.length; j++) {
                         orderList += `\n ${pizza[j].qty} X ${pizza[j].name}
@@ -71,3 +78,9 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
 
 });
 
+
+
+/*
+{
+   
+}*/
