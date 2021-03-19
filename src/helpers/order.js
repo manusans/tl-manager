@@ -41,7 +41,7 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
                   
                   orderList += body[i].iceCreams.length === 0 ? `` : `\n---- GELATI ----\n`;
                   for (let k = 0; k < body[i].iceCreams.length; k++){
-                     orderList += `  ${k+1}) ${body[i].iceCreams[k].product.name} (${body[i].iceCreams[k].product.price}€) con:\n`;
+                     orderList += `  - ${body[i].iceCreams[k].product.name} (${body[i].iceCreams[k].product.price}€) con:\n`;
                      orderList += `  ...... ${body[i].iceCreams[k].flavors.join("\n...... ")}`;
                      orderList += `\n`;                     
                   }
