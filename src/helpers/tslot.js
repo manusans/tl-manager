@@ -27,3 +27,17 @@ export const changeTSlotStatus = (day, start_time, associated_order) => new Prom
     .then( res => { resolves (res) } )
     .catch( err => { rejects (err) } )
 });
+
+
+export const changeTSlotKitchenStatus = (day, start_time, kitchen_closed) => new Promise((resolves, rejects) =>{
+    var action = kitchen_closed === 'NO' ? 'lock' : 'unlock';
+    
+    fetch(`https://time2livery.com/taranges/changeKitchenStatus/ck_6ed8647be5acc63877d339af614b60f2b0d7f32c`, {
+        method: 'post',
+        body:    JSON.stringify({day: day, start_time: start_time, action: action }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then( res => { resolves (res) } )
+    .catch( err => { rejects (err) } )
+});

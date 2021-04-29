@@ -21,6 +21,7 @@ export const Orders = (props) => {
                 <CopyToClipboard text={order}>
                    <button class='btn btn-primary'>Copia Ordine</button>
                 </CopyToClipboard>
+
              </div>
           ))}
        </div>

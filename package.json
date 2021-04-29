@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
+    "escpos": "^3.0.0-alpha.6",
     "node-fetch": "^2.6.1",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0",

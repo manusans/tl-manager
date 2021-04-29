@@ -9,7 +9,9 @@ import { fetchTSlots } from './helpers/tslot';
 //pages
 import {Orders} from './pages/order';
 import {Slots} from './pages/slot';
+import {KSlots} from './pages/kslot';
 import {TSlots} from './pages/tslot';
+import {KTSlots} from './pages/ktslot';
 
 
 import {
@@ -59,8 +61,14 @@ function App() {
                <Route path="/slots">
                   <Slots slots={data.slots} refresh={refresh} />
                </Route>
+               <Route path="/kslots">
+                  <KSlots slots={data.slots} refresh={refresh} />
+               </Route>
                <Route path="/tslots">
                   <TSlots tslots={data.tslots} refresh={refresh} />
+               </Route>
+               <Route path="/ktslots">
+                  <KTSlots tslots={data.tslots} refresh={refresh} />
                </Route>
                <Route path="/">
                   <Orders orders={data.orders}/>

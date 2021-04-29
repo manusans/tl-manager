@@ -4,6 +4,7 @@ let prodMap = [];
 var orderList = ``;
 var orderArray = [];
 
+// const device  = new escpos.Serial('/dev/usb/lp0');
 
 export const fetchOrders = () => new Promise((resolves, rejects) => {
    fetch(`https://time2livery.com/exercises`)
@@ -14,8 +15,6 @@ export const fetchOrders = () => new Promise((resolves, rejects) => {
             prodMap.push({ id: body[i].id, name: body[i].name, price: body[i].price });
          }
          //console.log(prodMap)
-
-
 
          fetch(`https://time2livery.com/orders/last`)
             .then(res => res.json())

@@ -7,7 +7,7 @@ export const Slots = (props) => {
     const formattedSlots = (
        <div className="text-center">
           <div className="alert alert-primary mt-3">
-             <h5>stazio_free v1.0 - Slot DELIVERY</h5>
+             <h5>stazio_free v1.0 - Slot DELIVERY PIZZERIA</h5>
           </div>
           {props.slots.map(slot => (
              <div className = 'card mt-3 text-center'>
